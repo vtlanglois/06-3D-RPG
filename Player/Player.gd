@@ -13,7 +13,8 @@ var target = null
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+
+
 func _physics_process(delta):
 	velocity.y += gravity * delta
 	var falling = velocity.y
@@ -30,6 +31,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3.UP, true)
 	
 	if (Input.is_action_just_pressed("shoot")) and target != null and target.is_in_group("target"):
+		Global.update_score()
 		target.die()
 		
 func _input(event):
@@ -50,3 +52,7 @@ func get_input():
 		input_dir += Camera.global_transform.basis.x
 	input_dir = input_dir.normalized()
 	return input_dir
+
+
+func _on_Timer_timeout():
+	pass # Replace with function body.
